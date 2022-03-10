@@ -1,0 +1,32 @@
+    int add(Node* root){
+        if(root==NULL){
+            return 0;
+        }
+        return add(root->left)+root->data+add(root->right);
+    }
+    
+    bool isSumTree(Node* root)
+    {
+         if(root==NULL){
+             return true;
+         }
+         if(root->left==NULL && root->right==NULL){
+             return true;
+         }
+         int left_val=add(root->left);
+         int right_val=add(root->right);
+         int total=left_val+right_val;
+         if(total!=root->data){
+             return false;
+         }
+         if(total==root->data){
+             if(isSumTree(root->left)&&isSumTree(root->right)){
+                 return true;
+             }
+         }
+         return false;
+    }
+
+
+SPACE COMPLEXITY O(1)
+TIME COMPLEXITY O(N^2)
